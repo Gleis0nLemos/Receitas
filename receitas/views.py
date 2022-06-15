@@ -16,3 +16,17 @@ def receita(request, receita_id):
     }
 
     return render(request, 'receita.html', receita_a_exibir)
+
+def buscar(request):
+    list_receitas = Receita.objects.order_by('-date_receita').filter(publicada=True)
+
+    if 'buscar' in request.GET:
+        nome_a_buscar = request.GET['buscar']
+        if buscar:
+            list_receitas = list_receitas.filter(nome_receita__icontains=nome_a_buscar)
+
+    dados = {
+        'receitas' : list_receitas
+    }
+
+    return render(request, 'buscar.html', dados)
