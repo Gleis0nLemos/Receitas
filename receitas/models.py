@@ -2,10 +2,10 @@ from statistics import mode
 from tkinter import CASCADE
 from django.db import models
 from datetime import datetime
-from pessoas.models import Pessoa 
+from django.contrib.auth.models import User
 
 class Receita(models.Model):
-    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
+    pessoa = models.ForeignKey(User, on_delete=models.CASCADE)
     nome_receita = models.CharField(max_length=200)
     ingredientes = models.TextField()
     modo_preparo = models.TextField()
